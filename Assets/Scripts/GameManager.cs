@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
             Touch touch = Input.touches[0];
             if (touch.phase == TouchPhase.Began)
             {
-                Collider2D touchColider = getOnTouchCollider(touch);
+                Collider2D touchColider = TouchControlHandler.getOnTouchCollider(touch);
                 if (touchColider != null)
                 {
                     if (touchColider.tag == "aircraft")
@@ -37,19 +37,10 @@ public class GameManager : MonoBehaviour
             }
             if (touch.phase == TouchPhase.Moved)
             {
-                Collider2D touchColider = getOnTouchCollider(touch);
-                if (touchColider != null)
-                {
-                }
             }
         }
     }
 
-    private Collider2D getOnTouchCollider(Touch touch)
-    {
-        Vector3 wp= Camera.main.ScreenToWorldPoint(touch.position);
-        Vector2 touchPos = new Vector2(wp.x, wp.y);
-        return Physics2D.OverlapPoint(touchPos);
-    }
+    
     
 }

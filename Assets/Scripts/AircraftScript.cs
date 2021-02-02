@@ -20,6 +20,7 @@ namespace DefaultNamespace
             pathMakingState = PathMakingState.None;
             state = State.Wait;
             pathHandler = GetComponent<PathHandler>();
+            angle = 90;
         }
         
         private void Update()
@@ -31,7 +32,18 @@ namespace DefaultNamespace
                     Touch touch = Input.touches[0];
                     Vector3 wp= Camera.main.ScreenToWorldPoint(touch.position);
                     Vector2 touchPos = new Vector2(wp.x, wp.y);
-                    pathHandler.AddPointToPath(touchPos);
+                    Collider2D collider2D = TouchControlHandler.GetOnVector2Collider(touchPos);
+                    if (collider2D != null)
+                    {
+                        if (collider2D.tag == "Base")
+                        {
+                            pathHandler.ToBasePath(touchPos);
+                        }
+                    }
+                    else
+                    {
+                        pathHandler.AddPointToPath(touchPos);
+                    }
                 }
                 else
                 {
@@ -43,7 +55,6 @@ namespace DefaultNamespace
                 if (pathHandler.GetPathLength() == 0)
                 {
                     state = State.Wait;
-                    angle = 0;
                 }
                 else
                 {
@@ -56,6 +67,11 @@ namespace DefaultNamespace
                 MoveInCircle();
             }
         }
+
+        public void StopPathMaking()
+        {
+            pathMakingState = PathMakingState.None;
+        }
         private void MoveForward()
         {
             Vector2 toMovePoint = pathHandler.getNextPoint();
@@ -64,10 +80,10 @@ namespace DefaultNamespace
             {
                 float ang = Mathf.Atan2((toMovePoint.y - position.y) , (toMovePoint.x - position.x));
                 transform.eulerAngles = new Vector3(0, 0, ang * Mathf.Rad2Deg);
-                //transform.gameObject.GetComponent<Rigidbody2D>().rotation = ang;
+                
                 position = Vector2.MoveTowards(position, toMovePoint, (speed * Time.deltaTime));
-                //position.x = position.x + Mathf.Cos(ang) * (speed * Time.deltaTime);
-                //position.y = position.y + Mathf.Sin(ang) * (speed * Time.deltaTime);
+
+                angle = ang;
                 transform.position = position;
                 pathHandler.PointReached();
             }
@@ -93,13 +109,7 @@ namespace DefaultNamespace
             position.y = y;
 
             transform.position = position;
-            /*Vector2 position = transform.position;
-            
-            transform.eulerAngles = new Vector3(0,0, transform.eulerAngles.z + 1);
-            position.y += speed * Time.deltaTime; 
-            transform.position = position;*/
-
-
+           
         }
     }
     enum State

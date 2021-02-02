@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class PathHandler : MonoBehaviour
@@ -16,10 +17,19 @@ public class PathHandler : MonoBehaviour
     {
         return positions.Count - 1;
     }
+
+    private AircraftScript aircraftScript;
     public void AddPointToPath(Vector2 position)
     {
         positions.Add(position);
         
+    }
+
+    public void ToBasePath(Vector2 position)
+    {
+        CreateNewPath(transform.position);
+        AddPointToPath(position);
+        aircraftScript.StopPathMaking();
     }
 
     public void CreateNewPath(Vector2 position)
@@ -50,6 +60,7 @@ public class PathHandler : MonoBehaviour
 
     private void Start()
     {
+        aircraftScript = gameObject.GetComponent<AircraftScript>();
         positions = new List<Vector3>();
         positions.Add(transform.position);
         

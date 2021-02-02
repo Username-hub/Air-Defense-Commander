@@ -23,6 +23,7 @@
     </explicitIncludes>
     <explicitExcludes>
       <Path>.dist</Path>
+      <Path>.git</Path>
       <Path>.idea</Path>
       <Path>Library</Path>
       <Path>Logs</Path>

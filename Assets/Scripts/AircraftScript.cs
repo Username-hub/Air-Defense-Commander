@@ -18,7 +18,7 @@ namespace DefaultNamespace
         private void Start()
         {
             pathMakingState = PathMakingState.None;
-            state = State.FollowPath;
+            state = State.Wait;
             pathHandler = GetComponent<PathHandler>();
         }
         
@@ -40,7 +40,20 @@ namespace DefaultNamespace
             }
             if (state == State.FollowPath)
             {
-                MoveForward();
+                if (pathHandler.GetPathLength() == 0)
+                {
+                    state = State.Wait;
+                    angle = 0;
+                }
+                else
+                {
+                    MoveForward();
+                }
+            }else if (state == State.Wait)
+            {
+                if (pathHandler.GetPathLength() > 0)
+                    state = State.FollowPath;
+                MoveInCircle();
             }
         }
         private void MoveForward()
@@ -58,6 +71,35 @@ namespace DefaultNamespace
                 transform.position = position;
                 pathHandler.PointReached();
             }
+        }
+
+        public float WaitRadius;
+        public float rotatinTime;
+        private float angle = 0;
+        private void MoveInCircle()
+        {
+            float rotationSpeed = 2 * Mathf.PI * WaitRadius * rotatinTime;
+            angle += (rotationSpeed * Time.deltaTime);
+            
+            
+            Vector2 position = transform.position;
+            float x = position.x + Mathf.Cos(angle) * WaitRadius;
+            float y = position.y + Mathf.Sin(angle) * WaitRadius;
+            float ang = Mathf.Atan2((y - position.y) , (x - position.x));
+            transform.eulerAngles = new Vector3(0, 0, ang * Mathf.Rad2Deg );
+
+
+            position.x = x;
+            position.y = y;
+
+            transform.position = position;
+            /*Vector2 position = transform.position;
+            
+            transform.eulerAngles = new Vector3(0,0, transform.eulerAngles.z + 1);
+            position.y += speed * Time.deltaTime; 
+            transform.position = position;*/
+
+
         }
     }
     enum State

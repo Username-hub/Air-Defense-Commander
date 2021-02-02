@@ -12,6 +12,10 @@ public class PathHandler : MonoBehaviour
     }
     private List<Vector3> positions;
 
+    public int GetPathLength()
+    {
+        return positions.Count - 1;
+    }
     public void AddPointToPath(Vector2 position)
     {
         positions.Add(position);

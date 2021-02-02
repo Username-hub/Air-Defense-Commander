@@ -8,7 +8,7 @@ AnimationClip:
   m_PrefabAsset: {fileID: 0}
   m_Name: PropellerAnimation
   serializedVersion: 6
-  m_Legacy: 0
+  m_Legacy: 1
   m_Compressed: 0
   m_UseHighQualityCurve: 1
   m_RotationCurves: []
@@ -47,24 +47,8 @@ AnimationClip:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings:
-    - serializedVersion: 2
-      path: 0
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 23
-      isPPtrCurve: 1
-    pptrCurveMapping:
-    - {fileID: 5370030078279322418, guid: 57b8e8c2eaf56a33cb1e9af27cdf6354, type: 3}
-    - {fileID: -2392802592806623272, guid: 57b8e8c2eaf56a33cb1e9af27cdf6354, type: 3}
-    - {fileID: 4242964920507330170, guid: 57b8e8c2eaf56a33cb1e9af27cdf6354, type: 3}
-    - {fileID: 6407892025952293110, guid: 57b8e8c2eaf56a33cb1e9af27cdf6354, type: 3}
-    - {fileID: -3868379339718828657, guid: 57b8e8c2eaf56a33cb1e9af27cdf6354, type: 3}
-    - {fileID: -1635995177798586597, guid: 57b8e8c2eaf56a33cb1e9af27cdf6354, type: 3}
-    - {fileID: 8882546128416752841, guid: 57b8e8c2eaf56a33cb1e9af27cdf6354, type: 3}
-    - {fileID: -7434530092169934873, guid: 57b8e8c2eaf56a33cb1e9af27cdf6354, type: 3}
-    - {fileID: -709416519612839843, guid: 57b8e8c2eaf56a33cb1e9af27cdf6354, type: 3}
+    genericBindings: []
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

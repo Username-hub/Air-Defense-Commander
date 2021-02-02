@@ -113,7 +113,8 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 5a4ed8ef5c48bddc4b85f20d9eb5ec9e, type: 2}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: 5a4ed8ef5c48bddc4b85f20d9eb5ec9e, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -266,6 +267,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  WaitRadius: 0.02
+  rotatinTime: 2
 --- !u!114 &6620091628434633744
 MonoBehaviour:
   m_ObjectHideFlags: 0

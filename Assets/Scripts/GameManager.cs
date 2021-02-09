@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using DefaultNamespace.AirBaseScripts;
+using DefaultNamespace.PlayerAircraftSripts;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public bool isPathMaking = false;
     // Update is called once per frame
     public GameObject mainUiCanvas;
     void Update()
@@ -27,7 +29,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (touchColider.tag == "aircraft")
                     {
-                        touchColider.gameObject.GetComponent<AircraftScript>().StartPathMaking();
+                        touchColider.gameObject.GetComponent<PlayerAircraftScript>().StartPathMaking();
                     }else if (touchColider.tag == "Base")
                     {
                         touchColider.gameObject.GetComponent<AirBaseScript>().SpawnBaseUI(mainUiCanvas);

@@ -6,16 +6,18 @@ namespace DefaultNamespace
     public class CameraScript : MonoBehaviour
     {
         public Camera mainCamera;
+        public GameManager gameManager;
         public float panSpeed;
         public float zoomSpeed;
         
         private float[] boundsX = new float[]{-15,15};
         private float[] boundsY = new float[]{-15,15};
-        private float[] zoomBounds = new float[]{5,20};
-        
+        private float[] zoomBounds = new float[] {5, 20};
+
         private void Update()
         {
-            HandleTouch();
+            if(!gameManager.isPathMaking)
+                HandleTouch();
         }
 
         private Vector3 lastPanPosition;

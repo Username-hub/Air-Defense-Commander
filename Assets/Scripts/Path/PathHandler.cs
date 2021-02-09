@@ -2,23 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using DefaultNamespace.EnemyScripts;
+using DefaultNamespace.PlayerAircraftSripts;
 using UnityEngine;
 
-public class PathHandler : MonoBehaviour
+public class PathHandler : PathHandlerBase
 {
-    private LineRenderer lineRenderer;
-    public PathHandler()
-    {
-        
-    }
-    private List<Vector3> positions;
-
+    
     public int GetPathLength()
     {
         return positions.Count - 1;
     }
 
-    private AircraftScript aircraftScript;
+    private PlayerAircraftScript aircraftScript;
     public void AddPointToPath(Vector2 position)
     {
         positions.Add(position);
@@ -32,35 +28,31 @@ public class PathHandler : MonoBehaviour
         aircraftScript.StopPathMaking();
     }
 
+    private GameObject enemyToChase;
+    
+    public void ChaseEnemyPath(GameObject enemy)
+    {
+        enemyToChase = enemy;
+        CreateNewPath(transform.position);
+        positions.Add(enemyToChase.transform.position);
+        aircraftScript.StopPathMaking();
+    }
+
+    public Vector3 GetEnemyToChasePos()
+    {
+        positions[1] = enemyToChase.transform.position;
+        return positions[1];
+    }
+    
     public void CreateNewPath(Vector2 position)
     {
         positions.Clear();
         positions.Add(position);
     }
 
-    public Vector2 getNextPoint()
-    {
-        if (positions.Count < 2)
-            return transform.position;
-        return positions[1];
-    }
-
-    public void PointReached()
-    {
-        Collider2D aircraftCollider = Physics2D.OverlapPoint(positions[1]);
-        if (aircraftCollider != null)
-        {
-            if (aircraftCollider.name == gameObject.name)
-            {
-
-                positions.RemoveAt(1);
-            }
-        }
-    }
-
     private void Start()
     {
-        aircraftScript = gameObject.GetComponent<AircraftScript>();
+        aircraftScript = gameObject.GetComponent<PlayerAircraftScript>();
         positions = new List<Vector3>();
         positions.Add(transform.position);
         

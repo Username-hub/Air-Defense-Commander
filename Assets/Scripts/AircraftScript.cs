@@ -10,10 +10,12 @@ namespace DefaultNamespace
 
         public PathHandlerBase pathHandlerBase;
         public GameManager gameManager;
-        
+        public UnitInfoScript unitInfoScript;
 
-        
-        
+        protected void UpdateAircrafUI()
+        {
+            unitInfoScript.SetRotationOffset(transform.eulerAngles.z);
+        }
 
         private void Start()
         {
@@ -34,8 +36,13 @@ namespace DefaultNamespace
 
                 angle = ang;
                 transform.position = position;
-                pathHandlerBase.PointReached();
+                CheckPointReach();
             }
+        }
+
+        protected virtual void CheckPointReach()
+        {
+            pathHandlerBase.PointReached();
         }
         
     }

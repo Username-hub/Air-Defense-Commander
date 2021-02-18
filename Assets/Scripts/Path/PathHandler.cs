@@ -28,7 +28,7 @@ public class PathHandler : PathHandlerBase
         aircraftScript.StopPathMaking();
     }
 
-    private GameObject enemyToChase;
+    public GameObject enemyToChase;
     
     public void ChaseEnemyPath(GameObject enemy)
     {

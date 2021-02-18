@@ -9,8 +9,11 @@ namespace DefaultNamespace.PlayerAircraftSripts
         private State state;
         
         private PathMakingState pathMakingState;
+
+        public float maxSpeed;
         private void Start()
         {
+            speed = maxSpeed;
             pathMakingState = PathMakingState.None;
             state = State.Wait;
             pathHandlerBase = GetComponent<PathHandler>();
@@ -21,36 +24,7 @@ namespace DefaultNamespace.PlayerAircraftSripts
             //Path making
             if (pathMakingState == PathMakingState.MakingPath)
             {
-                if (Input.touchCount > 0)
-                {
-                    gameManager.isPathMaking = true;
-                    Touch touch = Input.touches[0];
-                    Vector3 wp= Camera.main.ScreenToWorldPoint(touch.position);
-                    Vector2 touchPos = new Vector2(wp.x, wp.y);
-                    Collider2D collider2D = TouchControlHandler.GetOnVector2Collider(touchPos);
-                    if (collider2D != null)
-                    {
-                        if (collider2D.tag == "Base")
-                        {
-                            (pathHandlerBase as PathHandler).ToBasePath(touchPos);
-                        }
-
-                        if (collider2D.tag == "Enemy")
-                        {
-                            (pathHandlerBase as PathHandler).ChaseEnemyPath(collider2D.gameObject);
-                            state = State.FollowAircraft;
-                        }
-                    }
-                    else
-                    {
-                        (pathHandlerBase as PathHandler).AddPointToPath(touchPos);
-                    }
-                }
-                else
-                {
-                    gameManager.isPathMaking = false;
-                    pathMakingState = PathMakingState.None;
-                }
+                TouchPathMaking();
             }
             //Move
             if (state == State.FollowPath)
@@ -73,11 +47,72 @@ namespace DefaultNamespace.PlayerAircraftSripts
             {
                 MoveForward((pathHandlerBase as PathHandler).GetEnemyToChasePos());
             }
+            else if (state == State.CloseFollow)
+            {
+                if((pathHandlerBase as PathHandler).enemyToChase != null)
+                    MoveForward((pathHandlerBase as PathHandler).GetEnemyToChasePos());
+                else
+                {
+                    state = State.FollowPath;
+                    speed = maxSpeed;
+                }
+            }
+            UpdateAircrafUI();
         }
+
+        public void enemyInSootRange(GameObject enemyGameObjet)
+        {
+            if (state == State.FollowAircraft)
+            {
+                if (enemyGameObjet == (pathHandlerBase as PathHandler).enemyToChase)
+                {
+                    EnemyAircraftScript enemyAircraftScript =
+                        (pathHandlerBase as PathHandler).enemyToChase.GetComponent<EnemyAircraftScript>();
+                    speed = enemyAircraftScript.speed;
+                    (pathHandlerBase as PathHandler).enemyToChase = enemyAircraftScript.enemyTail;
+                    state = State.CloseFollow;
+                }
+            }
+        }
+        private void TouchPathMaking()
+        {
+            if (Input.touchCount > 0)
+            {
+                gameManager.isPathMaking = true;
+                Touch touch = Input.touches[0];
+                Vector3 wp= Camera.main.ScreenToWorldPoint(touch.position);
+                Vector2 touchPos = new Vector2(wp.x, wp.y);
+                Collider2D collider2D = TouchControlHandler.GetOnVector2Collider(touchPos);
+                if (collider2D != null)
+                {
+                    if (collider2D.tag == "Base")
+                    {
+                        (pathHandlerBase as PathHandler).ToBasePath(touchPos);
+                    }
+
+                    if (collider2D.tag == "Enemy")
+                    {
+                        (pathHandlerBase as PathHandler).ChaseEnemyPath(collider2D.gameObject);
+                        state = State.FollowAircraft;
+                    }
+                }
+                else
+                {
+                    (pathHandlerBase as PathHandler).AddPointToPath(touchPos);
+                }
+            }
+            else
+            {
+                gameManager.isPathMaking = false;
+                pathMakingState = PathMakingState.None;
+            }
+        }
+        
         public void StartPathMaking()
         {
             (pathHandlerBase as PathHandler).CreateNewPath(transform.position);
             pathMakingState = PathMakingState.MakingPath;
+            state = State.FollowPath;
         }
         
         public void StopPathMaking()
@@ -108,14 +143,21 @@ namespace DefaultNamespace.PlayerAircraftSripts
             transform.position = position;
            
         }
+
+        protected override void CheckPointReach()
+        {
+            if(state == State.FollowPath)
+                pathHandlerBase.PointReached();
+        }
+
     }
-    
-    
+
     enum State
     {
         Wait,
         FollowPath,
-        FollowAircraft
+        FollowAircraft,
+        CloseFollow
     }
 
     enum PathMakingState

@@ -8,23 +8,32 @@ namespace DefaultNamespace.EnemyScripts
 {
     public class EnemyAircraftScript : AircraftScript
     {
-        public TextMeshProUGUI debugText;
         public Transform enemyAim;
         public GameObject enemyTail;
- 
+        public Animator enemyAnimator;
         private void Start()
         {
+            currentHealth = maxHealth;
             pathHandlerBase = GetComponent<PathHandlerBase>();
-            Debug.Log(pathHandlerBase as EnemyPathHandler);
             (pathHandlerBase as EnemyPathHandler).BuildPath(enemyAim.position);
         }
 
+        
         private void Update()
         {
-            //TODO: Delete
-            //debugText.text = "Enemy aim: " + enemyAim.name + "\n" + "Step to aim: " + (pathHandlerBase as EnemyPathHandler).stepsToAim.ToString();
             MoveForward(pathHandlerBase.getNextPoint());
+            unitInfoScript.SetRotationOffset(transform.eulerAngles.z);
+            unitInfoScript.UpdateBars(currentHealth,maxHealth);
+            if (currentHealth <= 0)
+            {
+                enemyAnimator.Play("EnemyBomberDeathAnimation");
+            }
+                
         }
-        
+
+        public void DeathAnimationEnd()
+        {
+            Destroy(gameObject);
+        }
     }
 } 

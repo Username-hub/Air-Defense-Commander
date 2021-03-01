@@ -6,8 +6,11 @@ namespace DefaultNamespace
 {
     public class AircraftScript : MonoBehaviour
     {
-        public float speed;
+        public int toAircraftDamage;
 
+        public float speed;
+        public int maxHealth;
+        protected int currentHealth;
         public PathHandlerBase pathHandlerBase;
         public GameManager gameManager;
         public UnitInfoScript unitInfoScript;
@@ -17,6 +20,14 @@ namespace DefaultNamespace
             unitInfoScript.SetRotationOffset(transform.eulerAngles.z);
         }
 
+        public void DeathAnimationEnd()
+        {
+            Destroy(gameObject);
+        }
+        public void TakeDamage(int damage)
+        {
+            currentHealth -= damage;
+        }
         private void Start()
         {
             throw new NotImplementedException();
@@ -35,7 +46,7 @@ namespace DefaultNamespace
                 position = Vector2.MoveTowards(position, toMovePoint, (speed * Time.deltaTime));
 
                 angle = ang;
-                transform.position = position;
+                gameObject.transform.localPosition = position;
                 CheckPointReach();
             }
         }

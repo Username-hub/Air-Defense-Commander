@@ -6,6 +6,8 @@ namespace DefaultNamespace.PlayerAircraftSripts
 {
     public class WeaponScript : MonoBehaviour
     {
+        public float shootCallDawn;
+        protected float currentShootCallDawn;
         public PlayerAircraftScript playerAircraftScript;
         public ParticleSystem leftGun;
         public ParticleSystem rightGun;
@@ -17,11 +19,30 @@ namespace DefaultNamespace.PlayerAircraftSripts
             }
         }
 
+        public void Start()
+        {
+            currentShootCallDawn = 0;
+        }
+
+        private void Update()
+        {
+            if (currentShootCallDawn > 0)
+            {
+                currentShootCallDawn -= Time.deltaTime;
+            }
+        }
+
         private void OnTriggerStay2D(Collider2D other)
         {
             if (other.CompareTag("Enemy"))
             {
-                enemyInRanage(other.gameObject.GetComponent<EnemyAircraftScript>());  
+                if (currentShootCallDawn <= 0)
+                {
+                    enemyInRanage(other.gameObject.GetComponent<EnemyAircraftScript>());
+                    EnemyAircraftScript enemyAircraftScript = other.gameObject.GetComponent<EnemyAircraftScript>();
+                    enemyAircraftScript.TakeDamage(playerAircraftScript.toAircraftDamage);
+                    currentShootCallDawn = shootCallDawn;
+                }
             }
         }
 

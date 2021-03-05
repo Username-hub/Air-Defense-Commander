@@ -54,6 +54,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   airBaseScript: {fileID: 0}
+  buttons:
+  - {fileID: 240799594791067117}
+  - {fileID: 240799595668137401}
+  - {fileID: 240799595567685736}
+  - {fileID: 240799595981513900}
 --- !u!222 &7411533228643366367
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -188,6 +193,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4074124046558234857, guid: cbaee97a395d999168403e863f5e2970, type: 3}
   m_PrefabInstance: {fileID: 7411533229095372833}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &240799594791067117 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7317350765535663564, guid: cbaee97a395d999168403e863f5e2970, type: 3}
+  m_PrefabInstance: {fileID: 7411533229095372833}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24c728cd41d43ff830af6133ef5e3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7411533229467973028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -201,7 +217,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4074124046558234856, guid: cbaee97a395d999168403e863f5e2970, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4074124046558234856, guid: cbaee97a395d999168403e863f5e2970, type: 3}
       propertyPath: m_TagString
@@ -291,6 +307,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 225
       objectReference: {fileID: 0}
+    - target: {fileID: 7317350765535663564, guid: cbaee97a395d999168403e863f5e2970, type: 3}
+      propertyPath: aircraftChosePanel
+      value: 
+      objectReference: {fileID: 2533352892363843909}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbaee97a395d999168403e863f5e2970, type: 3}
 --- !u!224 &6796279319120985421 stripped
@@ -298,6 +318,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4074124046558234857, guid: cbaee97a395d999168403e863f5e2970, type: 3}
   m_PrefabInstance: {fileID: 7411533229467973028}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &240799595567685736 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7317350765535663564, guid: cbaee97a395d999168403e863f5e2970, type: 3}
+  m_PrefabInstance: {fileID: 7411533229467973028}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24c728cd41d43ff830af6133ef5e3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7411533229568880757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -311,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4074124046558234856, guid: cbaee97a395d999168403e863f5e2970, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4074124046558234856, guid: cbaee97a395d999168403e863f5e2970, type: 3}
       propertyPath: m_TagString
@@ -401,6 +432,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45
       objectReference: {fileID: 0}
+    - target: {fileID: 7317350765535663564, guid: cbaee97a395d999168403e863f5e2970, type: 3}
+      propertyPath: aircraftChosePanel
+      value: 
+      objectReference: {fileID: 2533352892363843909}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbaee97a395d999168403e863f5e2970, type: 3}
 --- !u!224 &6796279319222024348 stripped
@@ -408,6 +443,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4074124046558234857, guid: cbaee97a395d999168403e863f5e2970, type: 3}
   m_PrefabInstance: {fileID: 7411533229568880757}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &240799595668137401 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7317350765535663564, guid: cbaee97a395d999168403e863f5e2970, type: 3}
+  m_PrefabInstance: {fileID: 7411533229568880757}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24c728cd41d43ff830af6133ef5e3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7411533230285173088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -421,7 +467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4074124046558234856, guid: cbaee97a395d999168403e863f5e2970, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4074124046558234856, guid: cbaee97a395d999168403e863f5e2970, type: 3}
       propertyPath: m_TagString
@@ -493,11 +539,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4074124046558234857, guid: cbaee97a395d999168403e863f5e2970, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4074124046558234857, guid: cbaee97a395d999168403e863f5e2970, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -206
+      value: -209
       objectReference: {fileID: 0}
     - target: {fileID: 4074124046558234857, guid: cbaee97a395d999168403e863f5e2970, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -511,6 +557,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 135
       objectReference: {fileID: 0}
+    - target: {fileID: 7317350765535663564, guid: cbaee97a395d999168403e863f5e2970, type: 3}
+      propertyPath: aircraftChosePanel
+      value: 
+      objectReference: {fileID: 2533352892363843909}
+    - target: {fileID: 8718596743043053657, guid: cbaee97a395d999168403e863f5e2970, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -58
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718596743043053657, guid: cbaee97a395d999168403e863f5e2970, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbaee97a395d999168403e863f5e2970, type: 3}
 --- !u!224 &6796279319579441545 stripped
@@ -518,3 +576,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4074124046558234857, guid: cbaee97a395d999168403e863f5e2970, type: 3}
   m_PrefabInstance: {fileID: 7411533230285173088}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &240799595981513900 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7317350765535663564, guid: cbaee97a395d999168403e863f5e2970, type: 3}
+  m_PrefabInstance: {fileID: 7411533230285173088}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24c728cd41d43ff830af6133ef5e3d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

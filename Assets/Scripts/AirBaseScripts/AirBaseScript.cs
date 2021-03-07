@@ -1,5 +1,6 @@
 using System;
 using System.Security.Cryptography;
+using DefaultNamespace.PlayerAircraftSripts;
 using UnityEngine;
 
 namespace DefaultNamespace.AirBaseScripts
@@ -38,19 +39,41 @@ namespace DefaultNamespace.AirBaseScripts
             }
         }
 
+        AircraftData tempAircraftData;
         public void FighterButton(AircraftData aircraftData)
         {
             runwayAnimator.Play("StartAnimation");
             gameManager.isPathMaking = false;
             hangarScript.AircrcaftTakesOf(aircraftData);
-            
+            tempAircraftData = aircraftData;
+
         }
 
         public void StartAnimationEnd()
         {
             GameObject fighter =Instantiate(FighterPrefab, takeOff.transform.position, takeOff.transform.rotation);
-            fighter.GetComponent<AircraftScript>().gameManager = gameManager;
+            PlayerAircraftScript aircraftScript = fighter.GetComponent<PlayerAircraftScript>();
+            aircraftScript.gameManager = gameManager;
+            aircraftScript.aircraftData = tempAircraftData;
+        }
 
+        public Transform GetLandingPoint()
+        {
+            return takeOff.transform;
+        }
+
+        public LandingScript landingAnimation;
+        public void AircraftLanding(PlayerAircraftScript playerAircraftSript, AircraftData aircraftData)
+        {
+            hangarScript.AircraftLands(aircraftData);
+            Destroy(playerAircraftSript.gameObject);
+            landingAnimation.gameObject.SetActive(true);
+            landingAnimation.LandingAnimationStart();
+        }
+
+        public void LandingAnimationEnd()
+        {
+            landingAnimation.gameObject.SetActive(false);
         }
         
     }

@@ -1,3 +1,4 @@
+using DefaultNamespace.AirBaseScripts;
 using DefaultNamespace.EnemyScripts;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace DefaultNamespace.PlayerAircraftSripts
         private PathMakingState pathMakingState;
 
         public float maxSpeed;
+        public AircraftData aircraftData;
         private void Start()
         {
             speed = maxSpeed;
@@ -56,10 +58,18 @@ namespace DefaultNamespace.PlayerAircraftSripts
                     state = State.FollowPath;
                     speed = maxSpeed;
                 }
+            }else if (state == State.ToBaseMove || state == State.Landing)
+            {
+                MoveForward(pathHandlerBase.getNextPoint());
             }
+            UpdateAircrafData();
             UpdateAircrafUI();
         }
 
+        public void UpdateAircrafData()
+        {
+            aircraftData.HP = currentHealth;
+        }
         public void enemyInSootRange(GameObject enemyGameObjet)
         {
             if (state == State.FollowAircraft)
@@ -72,6 +82,20 @@ namespace DefaultNamespace.PlayerAircraftSripts
                     (pathHandlerBase as PathHandler).enemyToChase = enemyAircraftScript.enemyTail;
                     state = State.CloseFollow;
                 }
+            }
+        }
+
+        public void BaseInRange(Collider2D collider2D)
+        {
+            if (state == State.ToBaseMove)
+            {
+                AirBaseScript airBaseScripts = collider2D.gameObject.GetComponent<AirBaseScript>();
+                (pathHandlerBase as PathHandler).MakeLandingPath(transform.position, airBaseScripts.takeOff.transform,airBaseScripts.gameObject.transform);
+                state = State.Landing;
+            }else if (state == State.Landing & (pathHandlerBase as PathHandler).GetPathLength() < 3)
+            {
+                AirBaseScript airBaseScripts = collider2D.gameObject.GetComponent<AirBaseScript>();
+                airBaseScripts.AircraftLanding(this, aircraftData);
             }
         }
         private void TouchPathMaking()
@@ -88,6 +112,7 @@ namespace DefaultNamespace.PlayerAircraftSripts
                     if (collider2D.tag == "Base")
                     {
                         (pathHandlerBase as PathHandler).ToBasePath(touchPos);
+                        state = State.ToBaseMove;
                     }
 
                     if (collider2D.tag == "Enemy")
@@ -157,7 +182,9 @@ namespace DefaultNamespace.PlayerAircraftSripts
         Wait,
         FollowPath,
         FollowAircraft,
-        CloseFollow
+        CloseFollow,
+        ToBaseMove,
+        Landing
     }
 
     enum PathMakingState

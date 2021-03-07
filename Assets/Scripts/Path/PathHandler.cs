@@ -50,6 +50,13 @@ public class PathHandler : PathHandlerBase
         positions.Add(position);
     }
 
+    public void MakeLandingPath(Vector2 position, Transform takeOfPoint, Transform baseTransform)
+    {
+        CreateNewPath(position);
+        AddPointToPath(takeOfPoint.position);
+        AddPointToPath(baseTransform.position);
+    }
+
     private void Start()
     {
         aircraftScript = gameObject.GetComponent<PlayerAircraftScript>();

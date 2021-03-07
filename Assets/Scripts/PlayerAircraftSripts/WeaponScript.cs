@@ -44,6 +44,11 @@ namespace DefaultNamespace.PlayerAircraftSripts
                     currentShootCallDawn = shootCallDawn;
                 }
             }
+
+            if (other.CompareTag("Base"))
+            {
+                playerAircraftScript.BaseInRange(other);
+            }
         }
 
         private void enemyInRanage(EnemyAircraftScript enemyAircraftScript)

@@ -45,7 +45,6 @@ namespace DefaultNamespace.AirBaseScripts
         {
             aircraftsOutOfHangar.Add(takeOfAircraft);
             aircraftsInHangar.RemoveAt(aircraftsInHangar.IndexOf(takeOfAircraft));
-            Debug.Log(aircraftsOutOfHangar.Count.ToString() + " / " + aircraftsInHangar.Count.ToString());
         }
 
         public void AircraftLands(AircraftData landedAircraft)

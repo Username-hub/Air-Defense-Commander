@@ -59,7 +59,7 @@ namespace DefaultNamespace.AirBaseScripts
 
         public Transform GetLandingPoint()
         {
-            return takeOff.transform;
+            return landingAnimation.landingSpot;
         }
 
         public LandingScript landingAnimation;

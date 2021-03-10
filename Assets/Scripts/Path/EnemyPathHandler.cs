@@ -27,6 +27,14 @@ namespace DefaultNamespace.Path
             lineRenderer.SetPositions(positions.ToArray());
         }
 
+        public void BuildAfterBombingPath(Vector3 aim)
+        {
+            positions.Clear();
+            positions.Add(transform.position);
+            positions.Add(aim);
+            lineRenderer.positionCount = positions.Count;
+            lineRenderer.SetPositions(positions.ToArray());
+        }
         public void BuildPath(Vector3 aim)
         {
             List<Vector3> path = new List<Vector3>();

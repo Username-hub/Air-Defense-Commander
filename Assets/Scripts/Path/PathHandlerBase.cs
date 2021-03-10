@@ -17,7 +17,7 @@ namespace DefaultNamespace.EnemyScripts
             return positions[1];
         }
         
-        public void PointReached()
+        public bool PointReached()
         {
             Collider2D aircraftCollider = Physics2D.OverlapPoint(positions[1]);
             if (aircraftCollider != null)
@@ -26,8 +26,11 @@ namespace DefaultNamespace.EnemyScripts
                 {
 
                     positions.RemoveAt(1);
+                    return true;
                 }
             }
+
+            return false;
         }
         
         protected List<Vector3> DrawQuadraticBezierCurve(Vector3 point0, Vector3 point1, Vector3 point2)

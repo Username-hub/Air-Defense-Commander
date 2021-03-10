@@ -56,9 +56,11 @@ MonoBehaviour:
   pathHandlerBase: {fileID: 9076939219287695324}
   gameManager: {fileID: 0}
   unitInfoScript: {fileID: 7779730386961183299}
+  bombDamage: 0
   enemyAim: {fileID: 0}
   enemyTail: {fileID: 8140084370151248931}
   enemyAnimator: {fileID: 2113514372003600537}
+  enemyBomberAnimatorScript: {fileID: 5406209504077050981}
 --- !u!114 &9076939219287695324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,6 +263,7 @@ GameObject:
   - component: {fileID: 2113514372003600537}
   - component: {fileID: 5807513906766837272}
   - component: {fileID: 2332678164806685629}
+  - component: {fileID: 5406209504077050981}
   m_Layer: 0
   m_Name: Animation
   m_TagString: Untagged
@@ -366,6 +369,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aircraftScript: {fileID: 211898253683148494}
+--- !u!114 &5406209504077050981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745231622848979306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68b16278a6847b1b7a81d172c429399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAircraftScript: {fileID: 211898253683148494}
+  animator: {fileID: 2113514372003600537}
 --- !u!1001 &3834383194228223498
 PrefabInstance:
   m_ObjectHideFlags: 0

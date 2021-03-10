@@ -35,7 +35,7 @@ namespace DefaultNamespace
         
         protected float angle = 0;
 
-        protected void MoveForward(Vector2 toMovePoint)
+        protected bool MoveForward(Vector2 toMovePoint)
         {
             Vector2 position = transform.position;
             if (toMovePoint != position)
@@ -47,13 +47,15 @@ namespace DefaultNamespace
 
                 angle = ang;
                 gameObject.transform.localPosition = position;
-                CheckPointReach();
+                return CheckPointReach();
             }
+
+            return false;
         }
 
-        protected virtual void CheckPointReach()
+        protected virtual bool CheckPointReach()
         {
-            pathHandlerBase.PointReached();
+            return pathHandlerBase.PointReached();
         }
         
     }

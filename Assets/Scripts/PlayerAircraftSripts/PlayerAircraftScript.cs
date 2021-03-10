@@ -90,9 +90,9 @@ namespace DefaultNamespace.PlayerAircraftSripts
             if (state == State.ToBaseMove)
             {
                 AirBaseScript airBaseScripts = collider2D.gameObject.GetComponent<AirBaseScript>();
-                (pathHandlerBase as PathHandler).MakeLandingPath(transform.position, airBaseScripts.takeOff.transform,airBaseScripts.gameObject.transform);
+                (pathHandlerBase as PathHandler).MakeLandingPath(transform.position, airBaseScripts.GetLandingPoint(),airBaseScripts.gameObject.transform);
                 state = State.Landing;
-            }else if (state == State.Landing & (pathHandlerBase as PathHandler).GetPathLength() < 3)
+            }else if (state == State.Landing & (pathHandlerBase as PathHandler).GetPathLength() < 2)
             {
                 AirBaseScript airBaseScripts = collider2D.gameObject.GetComponent<AirBaseScript>();
                 airBaseScripts.AircraftLanding(this, aircraftData);
@@ -169,10 +169,14 @@ namespace DefaultNamespace.PlayerAircraftSripts
            
         }
 
-        protected override void CheckPointReach()
+        protected override bool CheckPointReach()
         {
-            if(state == State.FollowPath)
+            if(state == State.FollowPath || state == State.Landing)
+            {
                 pathHandlerBase.PointReached();
+                return true;
+            }
+            return false;
         }
 
     }

@@ -145,7 +145,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1859767673}
-  - {fileID: 3008156447690559203}
+  - {fileID: 5196919719836153241}
   m_Father: {fileID: 2609232813726302318}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -254,7 +254,7 @@ MonoBehaviour:
   BaseUIPrefab: {fileID: 7411533228643366353, guid: c0a0cf06f4c78b5559d1b387aab525a3, type: 3}
   FighterPrefab: {fileID: 6620091628434633753, guid: e481f07a604b9bc6ba631b47c44a7b80, type: 3}
   gameManager: {fileID: 0}
-  landingAnimation: {fileID: 4193294597099746387}
+  landingAnimation: {fileID: 7153577884453793357}
 --- !u!212 &2609232813726302289
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -353,6 +353,37 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!1 &2671226448012345944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5196919719836153241}
+  m_Layer: 0
+  m_Name: Landing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5196919719836153241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2671226448012345944}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3008156447690559203}
+  m_Father: {fileID: 2609232812597200465}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3275657613212721413
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,10 +394,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3008156447690559203}
   - component: {fileID: 8030562061818691289}
-  - component: {fileID: 4193294597099746387}
   - component: {fileID: 4656168274004648074}
+  - component: {fileID: 7153577884453793357}
   m_Layer: 0
-  m_Name: Landing
+  m_Name: LandingAnimation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -379,12 +410,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3275657613212721413}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2609232812597200465}
-  m_RootOrder: 1
+  m_Father: {fileID: 5196919719836153241}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8030562061818691289
 SpriteRenderer:
@@ -437,20 +468,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4193294597099746387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3275657613212721413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7145cb124cd7218279118ec599cc01f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  airBaseScript: {fileID: 674691195044040810}
-  landingAnimator: {fileID: 4656168274004648074}
 --- !u!95 &4656168274004648074
 Animator:
   serializedVersion: 3
@@ -470,6 +487,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7153577884453793357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3275657613212721413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7145cb124cd7218279118ec599cc01f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  airBaseScript: {fileID: 674691195044040810}
+  landingSpot: {fileID: 5196919719836153241}
+  landingAnimator: {fileID: 4656168274004648074}
 --- !u!1 &6323947579382466311
 GameObject:
   m_ObjectHideFlags: 0

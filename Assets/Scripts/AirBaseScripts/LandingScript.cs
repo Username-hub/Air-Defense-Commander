@@ -7,7 +7,7 @@ using UnityEngine;
 public class LandingScript : MonoBehaviour
 {
     public AirBaseScript airBaseScript;
-
+    public Transform landingSpot;
     public Animator landingAnimator;
 
     public void LandingAnimationStart()

@@ -61,6 +61,7 @@ MonoBehaviour:
   enemyTail: {fileID: 8140084370151248931}
   enemyAnimator: {fileID: 2113514372003600537}
   enemyBomberAnimatorScript: {fileID: 5406209504077050981}
+  distAfterBombing: 50
 --- !u!114 &9076939219287695324
 MonoBehaviour:
   m_ObjectHideFlags: 0

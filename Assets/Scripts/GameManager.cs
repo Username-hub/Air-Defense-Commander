@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using DefaultNamespace;
 using DefaultNamespace.AirBaseScripts;
 using DefaultNamespace.PlayerAircraftSripts;
+using DefaultNamespace.SaveLoadSystem;
 using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameState gameState;
     // Start is called before the first frame update
     void Start()
     {
-
+        gameState = GameState.acive;
+        Time.timeScale = 1.0f;
     }
 
     public bool isPathMaking = false;
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject mainUiCanvas;
     void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && gameState == GameState.acive)
         {
             Touch touch = Input.touches[0];
             if (touch.phase == TouchPhase.Began)
@@ -42,7 +43,41 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    
+    public GameObject gameOverPanelPrefab;
 
-    
-    
+    public void GameOver()
+    {
+        Time.timeScale = 0;
+        Instantiate(gameOverPanelPrefab, mainUiCanvas.transform);
+        gameState = GameState.paused;
+    }
+
+    public int levelId;
+    public GameObject WinScreen;
+    public void LevelWin()
+    {
+        Time.timeScale = 0;
+        SaveSystem.SaveProgress(levelId);
+        Instantiate(WinScreen, mainUiCanvas.transform);
+        gameState = GameState.paused;
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        gameState = GameState.paused;
+    }
+
+    public void UnpauseGame()
+    {
+        Time.timeScale = 1;
+        gameState = GameState.acive;
+    }
+
+    public enum GameState
+    {
+        paused,
+        acive
+    }
 }

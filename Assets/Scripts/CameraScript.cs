@@ -16,7 +16,7 @@ namespace DefaultNamespace
 
         private void Update()
         {
-            if(!gameManager.isPathMaking)
+            if(!gameManager.isPathMaking && gameManager.gameState != GameManager.GameState.paused)
                 HandleTouch();
         }
 

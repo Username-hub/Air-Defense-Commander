@@ -22,8 +22,9 @@ public class AimFactoryScript : MonoBehaviour
         }
     }
 
+    public GameManager gameManager;
     private void GameOver()
     {
-        
+        gameManager.GameOver();
     }
 }

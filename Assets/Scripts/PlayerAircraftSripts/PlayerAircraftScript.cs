@@ -21,49 +21,57 @@ namespace DefaultNamespace.PlayerAircraftSripts
             pathHandlerBase = GetComponent<PathHandler>();
             angle = 90;
         }
+
         private void Update()
         {
-            //Path making
-            if (pathMakingState == PathMakingState.MakingPath)
+            if (gameManager.gameState != GameManager.GameState.paused)
             {
-                TouchPathMaking();
-            }
-            //Move
-            if (state == State.FollowPath)
-            {
-                if ((pathHandlerBase as PathHandler).GetPathLength() == 0)
+                //Path making
+                if (pathMakingState == PathMakingState.MakingPath)
                 {
-                    state = State.Wait;
+                    TouchPathMaking();
                 }
-                else
+
+                //Move
+                if (state == State.FollowPath)
+                {
+                    if ((pathHandlerBase as PathHandler).GetPathLength() == 0)
+                    {
+                        state = State.Wait;
+                    }
+                    else
+                    {
+                        MoveForward(pathHandlerBase.getNextPoint());
+                    }
+                }
+                else if (state == State.Wait)
+                {
+                    if ((pathHandlerBase as PathHandler).GetPathLength() > 0)
+                        state = State.FollowPath;
+                    MoveInCircle();
+                }
+                else if (state == State.FollowAircraft)
+                {
+                    MoveForward((pathHandlerBase as PathHandler).GetEnemyToChasePos());
+                }
+                else if (state == State.CloseFollow)
+                {
+                    if ((pathHandlerBase as PathHandler).enemyToChase != null)
+                        MoveForward((pathHandlerBase as PathHandler).GetEnemyToChasePos());
+                    else
+                    {
+                        state = State.FollowPath;
+                        speed = maxSpeed;
+                    }
+                }
+                else if (state == State.ToBaseMove || state == State.Landing)
                 {
                     MoveForward(pathHandlerBase.getNextPoint());
                 }
-            }else if (state == State.Wait)
-            {
-                if ((pathHandlerBase as PathHandler).GetPathLength() > 0)
-                    state = State.FollowPath;
-                MoveInCircle();
+
+                UpdateAircrafData();
+                UpdateAircrafUI();
             }
-            else if(state == State.FollowAircraft)
-            {
-                MoveForward((pathHandlerBase as PathHandler).GetEnemyToChasePos());
-            }
-            else if (state == State.CloseFollow)
-            {
-                if((pathHandlerBase as PathHandler).enemyToChase != null)
-                    MoveForward((pathHandlerBase as PathHandler).GetEnemyToChasePos());
-                else
-                {
-                    state = State.FollowPath;
-                    speed = maxSpeed;
-                }
-            }else if (state == State.ToBaseMove || state == State.Landing)
-            {
-                MoveForward(pathHandlerBase.getNextPoint());
-            }
-            UpdateAircrafData();
-            UpdateAircrafUI();
         }
 
         public void UpdateAircrafData()

@@ -12,6 +12,7 @@ namespace DefaultNamespace.EnemyScripts
         public Transform enemyAim;
         public GameObject enemyTail;
         public Animator enemyAnimator;
+        public EnemySpawnerScript enemySpawnerScript;
         private void Start()
         {
             isReturning = false;
@@ -82,6 +83,11 @@ namespace DefaultNamespace.EnemyScripts
         public void DeathAnimationEnd()
         {
             Destroy(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            enemySpawnerScript.EnemyDestroy();
         }
     }
 } 

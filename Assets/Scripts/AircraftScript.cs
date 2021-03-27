@@ -6,11 +6,11 @@ namespace DefaultNamespace
 {
     public class AircraftScript : MonoBehaviour
     {
-        public int toAircraftDamage;
+        public float toAircraftDamage;
 
         public float speed;
-        public int maxHealth;
-        protected int currentHealth;
+        public float maxHealth;
+        protected float currentHealth;
         public PathHandlerBase pathHandlerBase;
         public GameManager gameManager;
         public UnitInfoScript unitInfoScript;
@@ -24,7 +24,7 @@ namespace DefaultNamespace
         {
             Destroy(gameObject);
         }
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             currentHealth -= damage;
         }

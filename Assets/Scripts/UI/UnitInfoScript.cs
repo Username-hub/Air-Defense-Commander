@@ -23,7 +23,7 @@ public class UnitInfoScript : MonoBehaviour
         rectTransform.localRotation = Quaternion.Euler(new Vector3(0,0,-ang));
     }
 
-    public void UpdateBars(int currentHealth, int maxHealth)
+    public void UpdateBars(float currentHealth, float maxHealth)
     {
         healthBar.fillAmount = (float)currentHealth / (float)maxHealth;
     }

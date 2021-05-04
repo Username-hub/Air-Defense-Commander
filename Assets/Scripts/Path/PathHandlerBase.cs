@@ -9,7 +9,21 @@ namespace DefaultNamespace.EnemyScripts
         public float alpha = 0.5f;
         protected LineRenderer lineRenderer;
         protected List<Vector3> positions;
-        
+
+        public int GetPositionsCount()
+        {
+            return positions.Count;
+        }
+        public void CleatPath()
+        {
+            positions.Clear();
+            positions.Add(transform.position);
+            ClearLineRenderer();
+        }
+        public void ClearLineRenderer()
+        {
+            lineRenderer.positionCount = 0;
+        }
         public Vector2 getNextPoint()
         {
             if (positions.Count < 2)

@@ -15,6 +15,10 @@ namespace DefaultNamespace
         public GameManager gameManager;
         public UnitInfoScript unitInfoScript;
 
+        public float GetCurrentHealth()
+        {
+            return currentHealth;
+        }
         protected void UpdateAircrafUI()
         {
             unitInfoScript.SetRotationOffset(transform.eulerAngles.z);

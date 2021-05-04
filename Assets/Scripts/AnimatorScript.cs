@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 
-public class AnimatorScroipt : MonoBehaviour
+public class AnimatorScript : MonoBehaviour
 {
     public AircraftScript aircraftScript;
 

@@ -14,10 +14,32 @@ namespace DefaultNamespace
         private float[] boundsY = new float[]{-15,15};
         private float[] zoomBounds = new float[] {5, 20};
 
+        private bool wasPathmaking;
+
+        private void Start()
+        {
+            wasPathmaking = false;
+        }
+
         private void Update()
         {
-            if(!gameManager.isPathMaking && gameManager.gameState != GameManager.GameState.paused)
-                HandleTouch();
+            if (!gameManager.isPathMaking && gameManager.gameState != GameManager.GameState.paused)
+            {
+                if (!wasPathmaking)
+                {
+                    HandleTouch();
+
+                }
+                if (Input.touchCount < 1)
+                    wasPathmaking = false;
+            }
+            else
+            {
+                if (Input.touchCount < 1)
+                    wasPathmaking = false;
+                else
+                    wasPathmaking = true;
+            }
         }
 
         private Vector3 lastPanPosition;

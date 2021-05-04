@@ -54,20 +54,24 @@ namespace DefaultNamespace.EnemyScripts
         private bool isReturning;
         private void Update()
         {
-            if (isReturning)
+            if (pathHandlerBase.GetPositionsCount() > 0)
             {
-                if (MoveForward(returnAim))
+                if (isReturning)
                 {
-                    Destroy(gameObject);
+                    if (MoveForward(returnAim))
+                    {
+                        Destroy(gameObject);
+                    }
+
+                    UIUpdate();
                 }
-                UIUpdate();
+                else
+                {
+                    MoveForward(pathHandlerBase.getNextPoint());
+                    UIUpdate();
+                }
             }
-            else
-            {
-                MoveForward(pathHandlerBase.getNextPoint());
-                UIUpdate();
-            }
-                
+
         }
 
         private void UIUpdate()
@@ -76,6 +80,7 @@ namespace DefaultNamespace.EnemyScripts
             unitInfoScript.UpdateBars(currentHealth,maxHealth);
             if (currentHealth <= 0)
             {
+                pathHandlerBase.CleatPath();
                 enemyAnimator.Play("EnemyBomberDeathAnimation");
             }
         }

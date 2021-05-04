@@ -74,6 +74,12 @@ namespace DefaultNamespace.PlayerAircraftSripts
             }
         }
 
+        public void GoToWaitState()
+        {
+            (pathHandlerBase as PathHandler).CleatPath();
+            state = State.Wait;
+        }
+
         public void UpdateAircrafData()
         {
             aircraftData.HP = currentHealth;

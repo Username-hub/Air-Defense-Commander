@@ -42,6 +42,10 @@ namespace DefaultNamespace.PlayerAircraftSripts
                     EnemyAircraftScript enemyAircraftScript = other.gameObject.GetComponent<EnemyAircraftScript>();
                     enemyAircraftScript.TakeDamage(playerAircraftScript.toAircraftDamage);
                     currentShootCallDawn = shootCallDawn;
+                    if (enemyAircraftScript.GetCurrentHealth() <= 0)
+                    {
+                        playerAircraftScript.GoToWaitState();
+                    }
                 }
             }
 

@@ -6,7 +6,9 @@ namespace DefaultNamespace.PlayerAircraftSripts
 {
     public class PlayerAircraftScript : AircraftScript
     {
-
+        public float maxFuel;
+        public float fuelConsumptionRate;
+        private float currentFuel;
         private State state;
         
         private PathMakingState pathMakingState;
@@ -16,6 +18,7 @@ namespace DefaultNamespace.PlayerAircraftSripts
         private void Start()
         {
             speed = maxSpeed;
+            currentFuel = maxFuel;
             pathMakingState = PathMakingState.None;
             state = State.Wait;
             pathHandlerBase = GetComponent<PathHandler>();

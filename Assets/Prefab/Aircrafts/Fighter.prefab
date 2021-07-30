@@ -4915,9 +4915,10 @@ GameObject:
   - component: {fileID: 6620091628434633748}
   - component: {fileID: 6620091628434633755}
   - component: {fileID: 6620091628434633754}
-  - component: {fileID: 6817942182824712391}
-  - component: {fileID: 6620091628434633744}
   - component: {fileID: 6620091628434633751}
+  - component: {fileID: 6817942182824712391}
+  - component: {fileID: 2871444171014403036}
+  - component: {fileID: 6620091628434633744}
   m_Layer: 0
   m_Name: Fighter
   m_TagString: aircraft
@@ -5040,42 +5041,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6817942182824712391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6620091628434633753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 604b405d3da14ac6a4d7d84b7f1efce0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toAircraftDamage: 1
-  speed: 5
-  maxHealth: 10
-  pathHandlerBase: {fileID: 0}
-  gameManager: {fileID: 0}
-  unitInfoScript: {fileID: 5276517777222203749}
-  maxSpeed: 3
-  WaitRadius: 0.01
-  rotatinTime: 10
---- !u!114 &6620091628434633744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6620091628434633753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a10d45773271d747a69dc7a904af4cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curvePoints: 0
-  alpha: 0.5
-  enemyToChase: {fileID: 0}
 --- !u!120 &6620091628434633751
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -5174,6 +5139,59 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &6817942182824712391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620091628434633753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 604b405d3da14ac6a4d7d84b7f1efce0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toAircraftDamage: 1
+  maxHealth: 10
+  maxFuel: 100
+  fuelConsumptionRate: 5
+  pathHandlerBase: {fileID: 0}
+  gameManager: {fileID: 0}
+  unitInfoScript: {fileID: 5276517777222203749}
+  aircraftMoveHandler: {fileID: 0}
+  maxSpeed: 3
+--- !u!114 &2871444171014403036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620091628434633753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c888f6d368480da077da3cb3029283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aircraftScript: {fileID: 6817942182824712391}
+  speed: 3
+  angle: 90
+  WaitRadius: 3
+  rotatinTime: 3
+--- !u!114 &6620091628434633744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6620091628434633753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a10d45773271d747a69dc7a904af4cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curvePoints: 0
+  alpha: 0.5
+  enemyToChase: {fileID: 0}
 --- !u!1 &7952380736588917332
 GameObject:
   m_ObjectHideFlags: 0
@@ -9979,6 +9997,81 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1 &8840024145127210469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6928764177078178128}
+  - component: {fileID: 1805537467954665939}
+  - component: {fileID: 1275195777090260090}
+  m_Layer: 0
+  m_Name: FuelBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6928764177078178128
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8840024145127210469}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000799, y: 1.0000799, z: 1.0000799}
+  m_Children: []
+  m_Father: {fileID: 8932827338267691126}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -6.910702, y: -47}
+  m_SizeDelta: {x: 85.286, y: 10.95}
+  m_Pivot: {x: 0.41896945, y: -6.5793133}
+--- !u!222 &1805537467954665939
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8840024145127210469}
+  m_CullTransparentMesh: 1
+--- !u!114 &1275195777090260090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8840024145127210469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9926069, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: cb2bedcdbb3b032bc97b5b340ff8f5a1, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1001 &1727311137811047724
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9986,6 +10079,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6620091628434633749}
     m_Modifications:
+    - target: {fileID: 6827827168187341897, guid: 96c995bcec24ca2e7a9dffc888b73f50, type: 3}
+      propertyPath: fuelBar
+      value: 
+      objectReference: {fileID: 1275195777090260090}
     - target: {fileID: 7786551642703637850, guid: 96c995bcec24ca2e7a9dffc888b73f50, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10077,6 +10174,10 @@ PrefabInstance:
     - target: {fileID: 7786551642703637852, guid: 96c995bcec24ca2e7a9dffc888b73f50, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7786551643034859031, guid: 96c995bcec24ca2e7a9dffc888b73f50, type: 3}
+      propertyPath: m_Name
+      value: HealthBar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96c995bcec24ca2e7a9dffc888b73f50, type: 3}

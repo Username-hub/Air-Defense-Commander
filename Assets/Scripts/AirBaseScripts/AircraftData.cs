@@ -8,7 +8,9 @@ namespace DefaultNamespace.AirBaseScripts
         public AircraftType aircraftType;
         private float maxHP;
         public float HP;
-
+        private float maxFuel;
+        public float fuel;
+        
         public AircraftData(Sprite aircraftSprite, AircraftType aircraftType, float maxHp, float hp)
         {
             this.aircraftSprite = aircraftSprite;
@@ -17,11 +19,16 @@ namespace DefaultNamespace.AirBaseScripts
             this.HP = hp;
         }
 
-        public void RecoverAircraft(float hpRecoverySpeed)
+        public void RecoverAircraft(float hpRecoverySpeed,float fuelRecoverySpeed)
         {
             if (HP < maxHP)
             {
                 HP += hpRecoverySpeed * Time.deltaTime;
+            }
+
+            if (fuel < maxFuel)
+            {
+                fuel += fuelRecoverySpeed * Time.deltaTime;
             }
         }
     }

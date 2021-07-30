@@ -15,7 +15,7 @@ namespace DefaultNamespace.PlayerAircraftSripts
         {
             if (other.CompareTag("Enemy"))
             {
-                playerAircraftScript.enemyInSootRange(other.gameObject);
+                playerAircraftScript.EnemyInSootRange(other.gameObject);
             }
         }
 

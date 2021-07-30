@@ -7,6 +7,7 @@ namespace DefaultNamespace.AirBaseScripts
     public class HangarScript : MonoBehaviour
     {
         public float hpRecoverySpeed;
+        public float fuelRecoverySpeed;
 
         private List<AircraftData> aircraftsInHangar;
         private List<AircraftData> aircraftsOutOfHangar;
@@ -21,7 +22,7 @@ namespace DefaultNamespace.AirBaseScripts
         {
             foreach (var aircraft in aircraftsInHangar)
             {
-                aircraft.RecoverAircraft(hpRecoverySpeed);
+                aircraft.RecoverAircraft(hpRecoverySpeed,fuelRecoverySpeed);
             }
         }
 

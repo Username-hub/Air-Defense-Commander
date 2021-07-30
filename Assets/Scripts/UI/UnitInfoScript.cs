@@ -9,7 +9,7 @@ public class UnitInfoScript : MonoBehaviour
     public Canvas unitInfoCanvas;
 
     public Image healthBar;
-
+    public Image fuelBar;
     private RectTransform rectTransform;
     // Start is called before the first frame update
     void Start()
@@ -23,9 +23,10 @@ public class UnitInfoScript : MonoBehaviour
         rectTransform.localRotation = Quaternion.Euler(new Vector3(0,0,-ang));
     }
 
-    public void UpdateBars(float currentHealth, float maxHealth)
+    public void UpdateBars(float currentHealth, float maxHealth,float maxFuel,float currentFuel)
     {
-        healthBar.fillAmount = (float)currentHealth / (float)maxHealth;
+        healthBar.fillAmount = currentHealth / maxHealth;
+        fuelBar.fillAmount = currentFuel / maxFuel;
     }
     // Update is called once per frame
     void Update()

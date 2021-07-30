@@ -57,11 +57,11 @@ namespace DefaultNamespace
                     EnemyAircraftScript enemyAircraftScript = enemyAircraftObject.GetComponent<EnemyAircraftScript>();
                     enemyAircraftScript.gameManager = gameManager;
                     enemyAircraftScript.toAircraftDamage = enemySpawnInformation.toAircraftDamage;
-                    enemyAircraftScript.speed = enemySpawnInformation.Speed;
                     enemyAircraftScript.maxHealth = enemySpawnInformation.MaxHealth;
                     enemyAircraftScript.bombDamage = enemySpawnInformation.bombDamage;
                     enemyAircraftScript.enemyAim = enemySpawnInformation.enemyAim;
                     enemyAircraftScript.enemySpawnerScript = this;
+                    enemyAircraftScript.SetAircraftSpeedInMoveHandler(enemySpawnInformation.Speed);
                     enemySpawnInformationsLocal.RemoveAt(enemySpawnInformationsLocal.IndexOf(enemySpawnInformation));
                     break;
             }

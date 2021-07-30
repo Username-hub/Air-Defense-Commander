@@ -20,7 +20,7 @@ namespace DefaultNamespace.EnemyScripts
             pathHandlerBase = GetComponent<PathHandlerBase>();
             (pathHandlerBase as EnemyPathHandler).BuildPath(enemyAim.position);
         }
-
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Aim"))
@@ -58,7 +58,7 @@ namespace DefaultNamespace.EnemyScripts
             {
                 if (isReturning)
                 {
-                    if (MoveForward(returnAim))
+                    if (aircraftMoveHandler.MoveForward(returnAim))
                     {
                         Destroy(gameObject);
                     }
@@ -67,7 +67,7 @@ namespace DefaultNamespace.EnemyScripts
                 }
                 else
                 {
-                    MoveForward(pathHandlerBase.getNextPoint());
+                    aircraftMoveHandler.MoveForward(pathHandlerBase.getNextPoint());
                     UIUpdate();
                 }
             }
@@ -77,14 +77,14 @@ namespace DefaultNamespace.EnemyScripts
         private void UIUpdate()
         {
             unitInfoScript.SetRotationOffset(transform.eulerAngles.z);
-            unitInfoScript.UpdateBars(currentHealth,maxHealth);
+            unitInfoScript.UpdateBars(currentHealth,maxHealth,0,1);
             if (currentHealth <= 0)
             {
                 pathHandlerBase.CleatPath();
                 enemyAnimator.Play("EnemyBomberDeathAnimation");
             }
         }
-
+        
         public void DeathAnimationEnd()
         {
             Destroy(gameObject);

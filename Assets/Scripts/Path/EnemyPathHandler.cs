@@ -48,22 +48,6 @@ namespace DefaultNamespace.Path
             }
             positions.AddRange(path);
             positions.RemoveAt(1);
-            /*for (int i = 0; i < path.Count - 1; i+=2)
-            {
-                positions.AddRange(DrawQuadraticBezierCurve(path[i],path[i+1],path[i+2]));
-            }*/
-            /*positions.RemoveAt(0);
-            int len = path.Count;
-            positions.Add(path[0]);
-            positions.Add(path[1]);
-            for (int i = 0; i < len-3; i+=3)
-            {
-                positions.AddRange(CatmulRom(path[i],path[i+1],path[i+2],path[i+3]));
-            }
-            positions.Add(path[len - 2]);
-            positions.Add(path[len - 1]);
-            */
-            //positions.AddRange(CatmulRom(path[len - 3],path[len - 2],path[len - 1],path[len - 1]));
             lineRenderer.positionCount = positions.Count;
             lineRenderer.SetPositions(positions.ToArray());
         }

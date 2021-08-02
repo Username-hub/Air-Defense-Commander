@@ -51,20 +51,26 @@ namespace DefaultNamespace
             switch (enemySpawnInformation.enemyAircraftType)
             {
                 case EnemyAircraftType.Bomber :
-                    Transform tf = GetSpawner(enemySpawnInformation.SpawnerNumber);
-                    GameObject enemyAircraftObject =
-                        Instantiate(enemyBomberPrefab, tf.position, Quaternion.identity);
-                    EnemyAircraftScript enemyAircraftScript = enemyAircraftObject.GetComponent<EnemyAircraftScript>();
-                    enemyAircraftScript.gameManager = gameManager;
-                    enemyAircraftScript.toAircraftDamage = enemySpawnInformation.toAircraftDamage;
-                    enemyAircraftScript.maxHealth = enemySpawnInformation.MaxHealth;
-                    enemyAircraftScript.bombDamage = enemySpawnInformation.bombDamage;
-                    enemyAircraftScript.enemyAim = enemySpawnInformation.enemyAim;
-                    enemyAircraftScript.enemySpawnerScript = this;
-                    enemyAircraftScript.SetAircraftSpeedInMoveHandler(enemySpawnInformation.Speed);
-                    enemySpawnInformationsLocal.RemoveAt(enemySpawnInformationsLocal.IndexOf(enemySpawnInformation));
+                    SpawnEnemyBomber(enemySpawnInformation);
                     break;
             }
+        }
+
+        private void SpawnEnemyBomber(EnemySpawnInformation enemySpawnInformation)
+        {
+            Transform tf = GetSpawner(enemySpawnInformation.SpawnerNumber);
+            GameObject enemyAircraftObject =
+                Instantiate(enemyBomberPrefab, tf.position, Quaternion.identity);
+            EnemyAircraftScript enemyAircraftScript = enemyAircraftObject.GetComponent<EnemyAircraftScript>();
+            enemyAircraftScript.gameManager = gameManager;
+            enemyAircraftScript.toAircraftDamage = enemySpawnInformation.toAircraftDamage;
+            enemyAircraftScript.maxHealth = enemySpawnInformation.MaxHealth;
+            enemyAircraftScript.bombDamage = enemySpawnInformation.bombDamage;
+            enemyAircraftScript.enemyAim = enemySpawnInformation.enemyAim;
+            enemyAircraftScript.enemySpawnerScript = this;
+            enemyAircraftScript.SetAircraftSpeedInMoveHandler(enemySpawnInformation.Speed);
+            enemySpawnInformationsLocal.RemoveAt(enemySpawnInformationsLocal.IndexOf(enemySpawnInformation));
+
         }
 
         private Transform GetSpawner(int spawnerNum)

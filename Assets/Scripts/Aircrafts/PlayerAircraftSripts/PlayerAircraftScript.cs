@@ -4,9 +4,20 @@ using UnityEngine;
 
 namespace DefaultNamespace.PlayerAircraftSripts
 {
-    public class PlayerAircraftScript : AircraftScript
+    public class PlayerAircraftScript : MonoBehaviour
     {
 
+        public float toAircraftDamage;
+        
+        public float maxHealth;
+        protected float currentHealth;
+        public float maxFuel;
+        public float fuelConsumptionRate;
+        protected float currentFuel;
+        public PathHandlerBase pathHandlerBase;
+        public GameManager gameManager;
+        public UnitInfoScript unitInfoScript;
+        public PlayerAircraftMoveHandler aircraftMoveHandler;
         private State state;
 
         public State getState()
@@ -112,12 +123,7 @@ namespace DefaultNamespace.PlayerAircraftSripts
             (pathHandlerBase as PathHandler).CleatPath();
             state = State.Wait;
         }
-
-        public void MoveAircraftForward()
-        {
-            
-        }
-
+        
         public void UpdateAircrafData()
         {
             aircraftData.HP = currentHealth;
@@ -210,6 +216,11 @@ namespace DefaultNamespace.PlayerAircraftSripts
             gameManager.isPathMaking = false;
         }
         
+        protected void UpdateAircrafUI()
+        {
+            unitInfoScript.SetRotationOffset(transform.eulerAngles.z);
+            unitInfoScript.UpdateBars(currentHealth,maxHealth,maxFuel,currentFuel);
+        }
 
     }
 

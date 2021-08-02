@@ -15,7 +15,7 @@ namespace DefaultNamespace.PlayerAircraftSripts
         {
             if (other.CompareTag("Enemy"))
             {
-                playerAircraftScript.EnemyInSootRange(other.gameObject);
+                playerAircraftScript.aircraftMoveHandler.EnemyInSootRange(other.gameObject);
             }
         }
 
@@ -44,14 +44,14 @@ namespace DefaultNamespace.PlayerAircraftSripts
                     currentShootCallDawn = shootCallDawn;
                     if (enemyAircraftScript.GetCurrentHealth() <= 0)
                     {
-                        playerAircraftScript.GoToWaitState();
+                        playerAircraftScript.aircraftMoveHandler.GoToWaitState();
                     }
                 }
             }
 
             if (other.CompareTag("Base"))
             {
-                playerAircraftScript.BaseInRange(other);
+                playerAircraftScript.aircraftMoveHandler.BaseInRange(other);
             }
         }
 

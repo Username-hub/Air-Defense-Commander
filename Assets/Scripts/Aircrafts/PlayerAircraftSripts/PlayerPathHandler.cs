@@ -6,7 +6,7 @@ using DefaultNamespace.EnemyScripts;
 using DefaultNamespace.PlayerAircraftSripts;
 using UnityEngine;
 
-public class PathHandler : PathHandlerBase
+public class PlayerPathHandler : PathHandlerBase
 {
     
     public int GetPathLength()
@@ -25,7 +25,7 @@ public class PathHandler : PathHandlerBase
     {
         CreateNewPath(transform.position);
         AddPointToPath(position);
-        aircraftScript.StopPathMaking();
+        aircraftScript.pathMakingHandler.StopPathMaking();
     }
 
     public GameObject enemyToChase;
@@ -35,7 +35,7 @@ public class PathHandler : PathHandlerBase
         enemyToChase = enemy;
         CreateNewPath(transform.position);
         positions.Add(enemyToChase.transform.position);
-        aircraftScript.StopPathMaking();
+        aircraftScript.pathMakingHandler.StopPathMaking();
     }
 
     public Vector3 GetEnemyToChasePos()

@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (touchColider.tag == "aircraft")
                     {
-                        touchColider.gameObject.GetComponent<PlayerAircraftScript>().StartPathMaking();
+                        touchColider.gameObject.GetComponent<PlayerAircraftScript>().pathMakingHandler.StartPathMaking();
                     }else if (touchColider.tag == "Base")
                     {
                         touchColider.gameObject.GetComponent<AirBaseScript>().SpawnBaseUI(mainUiCanvas);

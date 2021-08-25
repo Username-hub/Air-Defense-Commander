@@ -6,19 +6,26 @@ using UnityEngine.PlayerLoop;
 
 namespace DefaultNamespace.EnemyScripts
 {
-    public class EnemyAircraftScript : AircraftScript
+    public class EnemyAircraftScript : MonoBehaviour
     {
+        public float maxHealth;
+        protected float currentHealth;
         public float bombDamage;
         public Transform enemyAim;
         public GameObject enemyTail;
         public Animator enemyAnimator;
         public EnemySpawnerScript enemySpawnerScript;
+        public EnemyPathHandler enemyPathHandler;
+        public EnemyUnitInfoScript enemyUnitInfoScript;
+        public AircraftMoveHandler aircraftMoveHandler;
+        public GameManager gameManager;
+        
         private void Start()
         {
             isReturning = false;
             currentHealth = maxHealth;
-            pathHandlerBase = GetComponent<PathHandlerBase>();
-            (pathHandlerBase as EnemyPathHandler).BuildPath(enemyAim.position);
+            enemyPathHandler = GetComponent<EnemyPathHandler>();
+            enemyPathHandler.BuildPath(enemyAim.position);
         }
         
         private void OnTriggerEnter2D(Collider2D other)
@@ -29,6 +36,20 @@ namespace DefaultNamespace.EnemyScripts
             }
         }
 
+        public float GetAircraftSpeed()
+        {
+            return aircraftMoveHandler.speed;
+        }
+        
+        public void TakeDamage(float damage)
+        {
+            currentHealth -= damage;
+        }
+        
+        public float GetCurrentHealth()
+        {
+            return currentHealth;
+        }
         public EnemyBomberAnimatorScript enemyBomberAnimatorScript;
         public void BombTarget(GameObject target)
         {
@@ -47,14 +68,14 @@ namespace DefaultNamespace.EnemyScripts
         public void ReturnToBase()
         {
             returnAim = new Vector3(transform.position.x + distAfterBombing * Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad),transform.position.y + distAfterBombing * Mathf.Sin(transform.eulerAngles.z * Mathf.Deg2Rad));
-            (pathHandlerBase as EnemyPathHandler).BuildAfterBombingPath(returnAim);
+            enemyPathHandler.BuildAfterBombingPath(returnAim);
             isReturning = true;
         }
         
         private bool isReturning;
         private void Update()
         {
-            if (pathHandlerBase.GetPositionsCount() > 0)
+            if (enemyPathHandler.GetPositionsCount() > 0)
             {
                 if (isReturning)
                 {
@@ -67,24 +88,28 @@ namespace DefaultNamespace.EnemyScripts
                 }
                 else
                 {
-                    aircraftMoveHandler.MoveForward(pathHandlerBase.getNextPoint());
+                    aircraftMoveHandler.MoveForward(enemyPathHandler.getNextPoint());
                     UIUpdate();
                 }
-            }
-
+            } 
         }
 
         private void UIUpdate()
         {
-            unitInfoScript.SetRotationOffset(transform.eulerAngles.z);
-            unitInfoScript.UpdateBars(currentHealth,maxHealth,0,1);
+            enemyUnitInfoScript.SetRotationOffset(transform.eulerAngles.z);
+            enemyUnitInfoScript.UpdateBars(currentHealth,maxHealth);
+            //TODO: replace from UIUpdate
             if (currentHealth <= 0)
             {
-                pathHandlerBase.CleatPath();
+                enemyPathHandler.CleatPath();
                 enemyAnimator.Play("EnemyBomberDeathAnimation");
             }
         }
         
+        public void SetAircraftSpeedInMoveHandler(float speed)
+        {
+            aircraftMoveHandler.speed = speed;
+        }
         public void DeathAnimationEnd()
         {
             Destroy(gameObject);

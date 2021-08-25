@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using DefaultNamespace.EnemyScripts;
 using UnityEngine;
 
 public class AnimatorScript : MonoBehaviour
 {
-    public AircraftScript aircraftScript;
+    public EnemyAircraftScript enemyAircraftScript;
 
     public void DeathAnimationEnd()
     {
-        aircraftScript.DeathAnimationEnd();
+        enemyAircraftScript.DeathAnimationEnd();
     }
 }

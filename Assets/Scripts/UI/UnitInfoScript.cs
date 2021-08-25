@@ -23,10 +23,10 @@ public class UnitInfoScript : MonoBehaviour
         rectTransform.localRotation = Quaternion.Euler(new Vector3(0,0,-ang));
     }
 
-    public void UpdateBars(float currentHealth, float maxHealth,float maxFuel,float currentFuel)
+    public void UpdateBars(float currentHealth, float maxHealth,float fuelFillAmount)
     {
         healthBar.fillAmount = currentHealth / maxHealth;
-        fuelBar.fillAmount = currentFuel / maxFuel;
+        fuelBar.fillAmount = fuelFillAmount;
     }
     // Update is called once per frame
     void Update()

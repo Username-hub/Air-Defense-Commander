@@ -1,10 +1,11 @@
+using DefaultNamespace.EnemyScripts;
 using UnityEngine;
 
 namespace DefaultNamespace
 {
     public class AircraftMoveHandler : MonoBehaviour
     {
-        public AircraftScript aircraftScript;
+        public EnemyAircraftScript enemyAircraftScript;
         public float speed;
         public float angle = 0;
         public bool MoveForward(Vector2 toMovePoint)
@@ -27,7 +28,7 @@ namespace DefaultNamespace
 
         protected virtual bool CheckPointReach()
         {
-            return aircraftScript.pathHandlerBase.PointReached();
+            return enemyAircraftScript.enemyPathHandler.PointReached();
         }
     }
 }

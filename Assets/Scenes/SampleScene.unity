@@ -337,11 +337,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2434412308301530920, guid: 3b511986bdb23b2358bb5b9a28d70452, type: 3}
       propertyPath: enemySpawnInformations.Array.data[0].Speed
-      value: 5
+      value: 0.0001
       objectReference: {fileID: 0}
     - target: {fileID: 2434412308301530920, guid: 3b511986bdb23b2358bb5b9a28d70452, type: 3}
       propertyPath: enemySpawnInformations.Array.data[1].Speed
-      value: 5
+      value: 0.00001
       objectReference: {fileID: 0}
     - target: {fileID: 2434412308301530920, guid: 3b511986bdb23b2358bb5b9a28d70452, type: 3}
       propertyPath: enemySpawnInformation.Array.data[0].enemyAim

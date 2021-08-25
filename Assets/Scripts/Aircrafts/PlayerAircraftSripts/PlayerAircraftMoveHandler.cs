@@ -7,14 +7,15 @@ namespace DefaultNamespace.PlayerAircraftSripts
 {
     public class PlayerAircraftMoveHandler : MonoBehaviour
     {
-        public float WaitRadius;
-        public float rotatinTime;
+        public float rotationSpeedForward;
+        public float rotationAngleChaneSpeed;
+        public float rotationTime;
         public float speed;
         public float maxSpeed;
         public float angle = 0;
         public PlayerAircraftScript playerAircraftScript;
         private PlayerPathHandler pathHandlerBase;
-
+        private Rigidbody2D rigidbody2D;
         private State state;
 
         public State getState()
@@ -25,6 +26,7 @@ namespace DefaultNamespace.PlayerAircraftSripts
         private void Start()
         {
             state = State.Wait;
+            rigidbody2D = GetComponent<Rigidbody2D>();
             pathHandlerBase = playerAircraftScript.pathHandlerBase;
             speed = maxSpeed;
         }
@@ -147,22 +149,10 @@ namespace DefaultNamespace.PlayerAircraftSripts
         
         public void MoveInCircle()
         {
-            float rotationSpeed = 2 * Mathf.PI * WaitRadius * rotatinTime;
-            angle += (rotationSpeed * Time.deltaTime);
-            
-            
-            Vector2 position = transform.position;
-            float x = position.x + Mathf.Cos(angle) * WaitRadius;
-            float y = position.y + Mathf.Sin(angle) * WaitRadius;
-            float ang = Mathf.Atan2((y - position.y) , (x - position.x));
-            transform.eulerAngles = new Vector3(0, 0, ang * Mathf.Rad2Deg );
-
-
-            position.x = x;
-            position.y = y;
-
-            transform.position = position;
-           
+            Vector3 rotation = transform.eulerAngles;
+            rotation.z += rotationAngleChaneSpeed * Time.deltaTime;
+            transform.eulerAngles = rotation;
+            transform.localPosition += transform.right * (rotationSpeedForward * Time.deltaTime);
         }
         
         protected bool CheckPointReach()

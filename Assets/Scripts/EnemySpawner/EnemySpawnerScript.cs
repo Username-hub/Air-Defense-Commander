@@ -63,7 +63,6 @@ namespace DefaultNamespace
                 Instantiate(enemyBomberPrefab, tf.position, Quaternion.identity);
             EnemyAircraftScript enemyAircraftScript = enemyAircraftObject.GetComponent<EnemyAircraftScript>();
             enemyAircraftScript.gameManager = gameManager;
-            enemyAircraftScript.toAircraftDamage = enemySpawnInformation.toAircraftDamage;
             enemyAircraftScript.maxHealth = enemySpawnInformation.MaxHealth;
             enemyAircraftScript.bombDamage = enemySpawnInformation.bombDamage;
             enemyAircraftScript.enemyAim = enemySpawnInformation.enemyAim;
@@ -85,10 +84,6 @@ namespace DefaultNamespace
             }
         }
     }
-    
-    
-    
-
     
     public enum EnemyAircraftType
     {

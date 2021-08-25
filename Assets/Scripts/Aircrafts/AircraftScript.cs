@@ -24,7 +24,7 @@ namespace DefaultNamespace
         protected void UpdateAircrafUI()
         {
             unitInfoScript.SetRotationOffset(transform.eulerAngles.z);
-            unitInfoScript.UpdateBars(currentHealth,maxHealth,maxFuel,currentFuel);
+            //unitInfoScript.UpdateBars(currentHealth,maxHealth,maxFuel,currentFuel);
         }
 
         public void DeathAnimationEnd()
@@ -36,15 +36,8 @@ namespace DefaultNamespace
             currentHealth -= damage;
         }
 
-        public float GetAircraftSpeed()
-        {
-            return aircraftMoveHandler.speed;
-        }
-
-        public void SetAircraftSpeedInMoveHandler(float speed)
-        {
-            aircraftMoveHandler.speed = speed;
-        }
+        
+        
         private void Start()
         {
             throw new NotImplementedException();

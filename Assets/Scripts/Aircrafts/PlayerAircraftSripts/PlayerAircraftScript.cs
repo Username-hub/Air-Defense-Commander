@@ -11,20 +11,17 @@ namespace DefaultNamespace.PlayerAircraftSripts
         
         public float maxHealth;
         private float currentHealth;
-        public float maxFuel;
-        public float fuelConsumptionRate;
-        private float currentFuel;
         public PlayerPathHandler pathHandlerBase;
         public GameManager gameManager;
         public UnitInfoScript unitInfoScript;
         public PlayerAircraftMoveHandler aircraftMoveHandler;
         public PathMakingHandler pathMakingHandler;
-        
         public AircraftData aircraftData;
+        public PlayerAircraftFuel playerAircraftFuel;
         
         private void Start()
         {
-            currentFuel = maxFuel;
+            currentHealth = maxHealth;
             pathHandlerBase = GetComponent<PlayerPathHandler>();
             pathMakingHandler = new PathMakingHandler(gameManager,pathHandlerBase,aircraftMoveHandler,this);
         }
@@ -44,7 +41,6 @@ namespace DefaultNamespace.PlayerAircraftSripts
             pathMakingHandler.OnUpdatePathMaker();
             //Move
             aircraftMoveHandler.OnUpdateMove();
-            currentFuel -= fuelConsumptionRate * Time.deltaTime;
                 
             UpdateAircrafData();
             UpdateAircrafUI();
@@ -53,13 +49,13 @@ namespace DefaultNamespace.PlayerAircraftSripts
         public void UpdateAircrafData()
         {
             aircraftData.HP = currentHealth;
-            aircraftData.fuel = currentFuel;
+            aircraftData.fuel = playerAircraftFuel.CurrentFuel;
         }
 
         protected void UpdateAircrafUI()
         {
             unitInfoScript.SetRotationOffset(transform.eulerAngles.z);
-            unitInfoScript.UpdateBars(currentHealth,maxHealth,maxFuel,currentFuel);
+            unitInfoScript.UpdateBars(currentHealth,maxHealth, playerAircraftFuel.FuelFillAmount);
         }
 
     }

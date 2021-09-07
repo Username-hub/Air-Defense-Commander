@@ -18,6 +18,9 @@ namespace DefaultNamespace.PlayerAircraftSripts
         public PathMakingHandler pathMakingHandler;
         public AircraftData aircraftData;
         public PlayerAircraftFuel playerAircraftFuel;
+        [SerializeField]
+        private PlayerFighterAnimatorScript playerFighterAnimatorScript;
+        
         
         private void Start()
         {
@@ -28,7 +31,7 @@ namespace DefaultNamespace.PlayerAircraftSripts
 
         private void Update()
         {
-            if (gameManager.gameState != GameManager.GameState.paused)
+            if (gameManager.gameState != GameManager.GameState.paused && currentHealth > 0)
             {
                 OnGameNotPausedUpdate();
             }
@@ -46,6 +49,31 @@ namespace DefaultNamespace.PlayerAircraftSripts
             UpdateAircrafUI();
         }
 
+        public void DamageAircraft(float damage)
+        {
+            currentHealth -= damage;
+            UpdateAircrafUI();
+            CheckIfDead();
+        }
+
+        private void CheckIfDead()
+        {
+            if (currentHealth <= 0)
+            {
+                OnDeath();
+            }
+        }
+
+        private void OnDeath()
+        {
+            unitInfoScript.gameObject.SetActive(false);
+            playerFighterAnimatorScript.StartDeathAnimation();
+        }
+        
+        public void DeathAnimationEnd()
+        {
+            Destroy(gameObject);
+        }
         public void UpdateAircrafData()
         {
             aircraftData.HP = currentHealth;
@@ -54,7 +82,6 @@ namespace DefaultNamespace.PlayerAircraftSripts
 
         protected void UpdateAircrafUI()
         {
-            unitInfoScript.SetRotationOffset(transform.eulerAngles.z);
             unitInfoScript.UpdateBars(currentHealth,maxHealth, playerAircraftFuel.FuelFillAmount);
         }
 

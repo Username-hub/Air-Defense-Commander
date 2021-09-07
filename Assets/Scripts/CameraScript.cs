@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace DefaultNamespace
 {
@@ -16,9 +17,22 @@ namespace DefaultNamespace
 
         private bool wasPathmaking;
 
+        public PostProcessVolume postProcessVolume;
+        public Vignette vignette;
+
+        public void TurnVignetteOnPause()
+        {
+            vignette.active = true;
+        }
+        
+        public void TurnVignetteOffPause()
+        {
+            vignette.active = false;
+        }
         private void Start()
         {
             wasPathmaking = false;
+            postProcessVolume.profile.TryGetSettings(out vignette);
         }
 
         private void Update()

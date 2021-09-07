@@ -23,7 +23,6 @@ namespace DefaultNamespace
         }
         protected void UpdateAircrafUI()
         {
-            unitInfoScript.SetRotationOffset(transform.eulerAngles.z);
             //unitInfoScript.UpdateBars(currentHealth,maxHealth,maxFuel,currentFuel);
         }
 

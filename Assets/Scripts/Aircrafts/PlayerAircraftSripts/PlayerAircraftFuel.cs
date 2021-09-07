@@ -54,9 +54,14 @@ namespace DefaultNamespace.PlayerAircraftSripts
             fuelFillAmount = currentFuel / maxFuel;
         }
 
+        [SerializeField]
+        private PlayerAircraftScript playerAircraftScript;
+
+        [SerializeField]
+        private float fuelOutDamage;
         private void FuelIsOut()
         {
-            
+            playerAircraftScript.DamageAircraft(fuelOutDamage * Time.deltaTime);
         }
     }
 }

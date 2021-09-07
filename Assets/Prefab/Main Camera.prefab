@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7226651613289259058}
   - component: {fileID: 2339768700311248322}
   - component: {fileID: 5446113801210253141}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PuseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,9 @@ GameObject:
   - component: {fileID: 5955732434189383512}
   - component: {fileID: 5955732434189383513}
   - component: {fileID: 5955732434189383514}
-  m_Layer: 0
+  - component: {fileID: 7815549423420756143}
+  - component: {fileID: 1714565702982881932}
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -225,6 +227,8 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   panSpeed: 20
   zoomSpeed: 0.1
+  postProcessVolume: {fileID: 1714565702982881932}
+  vignette: {fileID: 0}
 --- !u!81 &5955732434189383514
 AudioListener:
   m_ObjectHideFlags: 0
@@ -233,6 +237,83 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5955732434189383515}
   m_Enabled: 1
+--- !u!114 &7815549423420756143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5955732434189383515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 5955732434189383591}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
+--- !u!114 &1714565702982881932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5955732434189383515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 4f139a0dbfdeeb8c7a1043f3f772138b, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &5955732434580111500
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +327,7 @@ GameObject:
   - component: {fileID: 5955732434580111497}
   - component: {fileID: 5955732434580111498}
   - component: {fileID: 8954043624731042648}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5955732434588233216}
   - component: {fileID: 5955732434588233231}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +486,7 @@ GameObject:
   - component: {fileID: 5955732434760207236}
   - component: {fileID: 5955732434760207234}
   - component: {fileID: 5955732434760207235}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

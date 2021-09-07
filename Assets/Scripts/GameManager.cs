@@ -8,6 +8,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameState gameState;
+
+    public CameraScript cameraScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,25 +24,34 @@ public class GameManager : MonoBehaviour
     {
         if (Input.touchCount > 0 && gameState == GameState.acive)
         {
-            Touch touch = Input.touches[0];
-            if (touch.phase == TouchPhase.Began)
+            OnGameActiveTouch();
+        }else if (Input.touchCount < 1 && gameState == GameState.pathMakinPause)
+        {
+            UnpauseGame();
+        }
+    }
+
+    private void OnGameActiveTouch()
+    {
+        Touch touch = Input.touches[0];
+        if (touch.phase == TouchPhase.Began)
+        {
+            Collider2D touchColider = TouchControlHandler.getOnTouchCollider(touch);
+            if (touchColider != null)
             {
-                Collider2D touchColider = TouchControlHandler.getOnTouchCollider(touch);
-                if (touchColider != null)
+                if (touchColider.tag == "aircraft")
                 {
-                    if (touchColider.tag == "aircraft")
-                    {
-                        touchColider.gameObject.GetComponent<PlayerAircraftScript>().pathMakingHandler.StartPathMaking();
-                    }else if (touchColider.tag == "Base")
-                    {
-                        touchColider.gameObject.GetComponent<AirBaseScript>().SpawnBaseUI(mainUiCanvas);
-                    }
+                    PauseGameForPathMaking();
+                    touchColider.gameObject.GetComponent<PlayerAircraftScript>().pathMakingHandler.StartPathMaking();
+                }else if (touchColider.tag == "Base")
+                {
+                    touchColider.gameObject.GetComponent<AirBaseScript>().SpawnBaseUI(mainUiCanvas);
                 }
+            }
                 
-            }
-            if (touch.phase == TouchPhase.Moved)
-            {
-            }
+        }
+        if (touch.phase == TouchPhase.Moved)
+        {
         }
     }
     
@@ -63,6 +74,12 @@ public class GameManager : MonoBehaviour
         gameState = GameState.paused;
     }
 
+    private void PauseGameForPathMaking()
+    {
+        Time.timeScale = 0;
+        cameraScript.TurnVignetteOnPause();
+        gameState = GameState.pathMakinPause;
+    }
     public void PauseGame()
     {
         Time.timeScale = 0;
@@ -72,11 +89,13 @@ public class GameManager : MonoBehaviour
     public void UnpauseGame()
     {
         Time.timeScale = 1;
+        cameraScript.TurnVignetteOffPause();
         gameState = GameState.acive;
     }
 
     public enum GameState
     {
+        pathMakinPause,
         paused,
         acive
     }
